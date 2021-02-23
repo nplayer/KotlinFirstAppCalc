@@ -1,5 +1,6 @@
 package com.example.calculadoradenotas
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,18 +14,26 @@ class MainActivity : AppCompatActivity() {
         val resultado = resultado
 
         btCalcular.setOnClickListener{
-            val nota1 = Integer.parseInt(nota1.text.toString())
-            val nota2 = Integer.parseInt(nota2.text.toString())
-            val media = (nota1 + nota2) / 2
-            val faltas = Integer.parseInt(faltas.text.toString())
+            val nota1 = nota1.text.toString().toIntOrNull()?: 0
+            val nota2 = nota2.text.toString().toIntOrNull()?: 0
+            val media = (nota1 + nota2) / 2.0
+            val faltas = faltas.text.toString().toIntOrNull()?: -1
 
-            if(media >= 6 && faltas <= 10){
-                resultado.setText("Aluno foi Aprovado!!\n"+"Nota Final: " + media +
-                        "\nFaltas: " + faltas  )
+            if (faltas<0){
+                resultado.setText("!!!Erro!!!\nNúmero de faltas inválido!!!\nDigite novamente")
+                resultado.setTextColor(Color.RED)
             }
             else{
-                resultado.setText("Aluno foi Reprovado!!\n"+"Nota Final: " + media +
-                        "\nFaltas: " + faltas  )
+                if(media >= 6.0 && faltas <= 10){
+                    resultado.setText("Aluno foi Aprovado!!\n"+"Nota Final: " + media +
+                            "\nFaltas: " + faltas  )
+                    resultado.setTextColor(Color.GREEN)
+                }
+                else{
+                    resultado.setText("Aluno foi Reprovado!!\n"+"Nota Final: " + media +
+                            "\nFaltas: " + faltas  )
+                    resultado.setTextColor(Color.RED)
+                }
             }
         }
     }
