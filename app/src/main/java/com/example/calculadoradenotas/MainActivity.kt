@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         val resultado = resultado
 
         btCalcular.setOnClickListener{
-            val nota1 = nota1.text.toString().toIntOrNull()?: 0
-            val nota2 = nota2.text.toString().toIntOrNull()?: 0
+            val nota1 = nota1.text.toString().toDoubleOrNull()?: 0.0
+            val nota2 = nota2.text.toString().toDoubleOrNull()?: 0.0
             val media = (nota1 + nota2) / 2.0
             val faltas = faltas.text.toString().toIntOrNull()?: -1
 
